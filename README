@@ -1,0 +1,16 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2403
+
+*stackreg* is a Vim plugin to provide stackable registers.  If you delete or
+yank a text without specifying a register, the text will be pushed into
+a stack.  If you put without specifying a register, a text will be popped from
+the stack then it will be put.
+
+The concept of stackable registers is derived from Vz which is an editor for
+MS-DOS and it was widely used in Japan since 1989.
+
+Requirements:
+- Vim 7.2 or later
+- |advice| 0.0.0 or later (vimscript#2402)
+
+Latest version:
+http://github.com/kana/vim-stackreg

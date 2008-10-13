@@ -1,0 +1,134 @@
+*stackreg.txt*	Vz-like stackable registers
+
+Version 0.0.0
+Script ID: 2403
+Copyright (C) 2008 kana <http://whileimautomaton.net/>
+License: MIT license  {{{
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+}}}
+
+CONTENTS					*stackreg-contents*
+
+Introduction		|stackreg-introduction|
+Interface		|stackreg-interface|
+  Mappings		  |stackreg-mappings|
+Bugs			|stackreg-bugs|
+Changelog		|stackreg-changelog|
+
+
+
+
+==============================================================================
+INTRODUCTION					*stackreg-introduction*
+
+*stackreg* is a Vim plugin to provide stackable registers.  If you delete or
+yank a text without specifying a register, the text will be pushed into
+a stack.  If you put without specifying a register, a text will be popped from
+the stack then it will be put.
+
+The concept of stackable registers is derived from Vz which is an editor for
+MS-DOS and it was widely used in Japan since 1989.
+
+Requirements:
+- Vim 7.2 or later
+- |advice| 0.0.0 or later (vimscript#2402)
+
+
+
+
+==============================================================================
+INTERFACE					*stackreg-interface*
+
+------------------------------------------------------------------------------
+MAPPINGS					*stackreg-mappings*
+
+D		    or				*stackreg-D*
+dd		    or				*stackreg-dd*
+d{motion}	    or				*stackreg-d*
+{Visual}<Del>	    or				*stackreg-v_<Del>*
+{Visual}D	    or				*stackreg-v_D*
+{Visual}X	    or				*stackreg-v_X*
+{Visual}d	    or				*stackreg-v_d*
+{Visual}x					*stackreg-v_x*
+			Same as the original commands, but push the deleted
+			text into the stack if any register is not specified.
+
+Y		    or				*stackreg-Y*
+yy		    or				*stackreg-yy*
+y{motion}	    or				*stackreg-y*
+{Visual}Y	    or				*stackreg-v_Y*
+{Visual}y					*stackreg-v_y*
+			Same as the original commands, but push the yanked
+			text into the stack if any register is not specified.
+
+P		    or				*stackreg-P*
+[P		    or				*stackreg-[P*
+[p		    or				*stackreg-[p*
+]P		    or				*stackreg-]P*
+]p		    or				*stackreg-]p*
+gP		    or				*stackreg-gP*
+gp		    or				*stackreg-gp*
+p		    or				*stackreg-p*
+{Visual}P	    or				*stackreg-v_P*
+{Visual}p					*stackreg-v_p*
+			Same as the original commands, but pop a text from the
+			stack then put it if any register is not specified.
+
+					  *g:stackreg_no_default_key_mappings*
+						*:StackregDefaultKeyMappings*
+The above key mappings are defined by the default.  If you don't want to
+define them, define |g:stackreg_no_default_key_mappings| before this plugin is
+loaded (e.g. in your |vimrc|).  You can also use |:StackregDefaultKeyMappings|
+to redefine these key mappings.  This command doesn't override existing {lhs}s
+unless [!] is given.
+
+To disable advices defined by stackreg, use the following command:
+>
+	call advice#disable_pattern('^stackreg$')
+<
+
+
+
+
+==============================================================================
+BUGS						*stackreg-bugs*
+
+- Missing commands are:
+
+  c family
+  s family
+  variant of put commands which put the top text in the stack but doesn't pop.
+
+- There are many bugs around the world.
+
+
+
+
+==============================================================================
+CHANGELOG					*stackreg-changelog*
+
+0.0.0	2008-10-12T21:08:23+09:00
+	- Initial version.
+
+
+
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:fdm=marker:
